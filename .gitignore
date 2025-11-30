@@ -1,0 +1,130 @@
+# ==========================
+# Global / OS
+# ==========================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.Trash-*
+
+# ==========================
+# Node / JavaScript
+# ==========================
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# TypeScript cache/build
+*.tsbuildinfo
+
+# cache
+.cache/
+.vite/
+.parcel-cache/
+
+# build outputs
+dist/
+build/
+out/
+coverage/
+coverage-final.json
+.nyc_output/
+
+# environment
+.env
+.env.*.local
+.env.local
+.env.test
+.env.production
+.env.development
+
+# npm package lock files (optional) - keep if you want deterministic installs
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
+
+# ==========================
+# Editors / IDEs
+# ==========================
+# VSCode
+.vscode/
+.history/
+
+# JetBrains
+.idea/
+*.iml
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# ==========================
+# OS / shell
+# ==========================
+*~
+*.swp
+*.swo
+
+# ==========================
+# Misc / tooling
+# ==========================
+# local build artifacts
+*.log
+reports/
+
+# Docker
+docker-compose.override.yml
+Dockerfile.dev
+
+# Optional npm global types
+*.tgz
+
+# Yarn PnP
+.yarn/cache
+.yarn/unplugged
+.pnp.*
+
+# Python virtualenv
+venv/
+.env/venv/
+__pycache__/
+
+# Storybook
+.storybook/coverage
+.storybook-static/
+
+# Next/Vercel
+.next/
+.vercel/
+
+# NX/turbo
+.turbo/
+
+# Local editors' scratch files
+*.local
+
+# Lockfiles in subprojects: often kept, but you may uncomment to ignore
+# research-app/node_modules/
+# research-app/dist/
+
+# Keep this file maintained — add any custom, local-only file patterns here
