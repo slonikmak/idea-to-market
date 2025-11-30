@@ -1,10 +1,10 @@
-import { useProject } from '../../contexts/ProjectContext';
-import { useState } from 'react';
+import { useProject } from '../../contexts/useProject';
+import React from 'react';
 import styles from './Header.module.css';
 
 export function Header() {
   const { isSaving, clearProject } = useProject();
-  const [showHelp, setShowHelp] = useState(false);
+  const [showHelp, setShowHelp] = React.useState(false);
 
   return (
     <>
@@ -46,7 +46,10 @@ export function Header() {
     </header>
     {showHelp && (
       <div className={styles.modalOverlay} onClick={() => setShowHelp(false)}>
-        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div
+          className={styles.modal}
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+        >
           <div className={styles.modalHeader}>
             <h3 className={styles.modalTitle}>How to use the app</h3>
             <button className={styles.closeButton} onClick={() => setShowHelp(false)}>✕</button>

@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useProject } from '../../contexts/ProjectContext';
+import React from 'react';
+import { useProject } from '../../contexts/useProject';
 import { buildMarkdownFromState, parseMarkdown } from '../../utils/markdown';
 import type { MarkdownMode, ProblemTa, CompetitionItem } from '../../types';
 import styles from './MarkdownSection.module.css';
 
 export function MarkdownSection() {
   const { project, updateMarkdownRaw, updateProblemTa, updateCompetition } = useProject();
-  const [mode, setMode] = useState<MarkdownMode>('all');
-  const [errors, setErrors] = useState<string[]>([]);
-  const [success, setSuccess] = useState('');
+  const [mode, setMode] = React.useState<MarkdownMode>('all');
+  const [errors, setErrors] = React.useState<string[]>([]);
+  const [success, setSuccess] = React.useState('');
 
   const handleExport = () => {
     const markdown = buildMarkdownFromState(project, mode);

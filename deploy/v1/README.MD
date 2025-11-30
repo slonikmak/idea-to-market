@@ -50,9 +50,17 @@
 
 1. Оставьте в vite.config.ts `base: '/market-feet-tool/'` (как выше).
 
-2. В репозитории создайте workflow `.github/workflows/deploy.yml`:
+2. В репозитории создайте workflow `.github/workflows/deploy.yml`.
 
-   Пример workflow (используйте secrets.GITHUB_TOKEN, ничего дополнительно не нужно):
+  Рекомендуемый, более надёжный pipeline (реализован в примере проекта):
+
+  - Запускается на PR в `main` и при пуше в `main`.
+  - Содержит два шага: `build` (lint → typecheck → build, с кэшем npm) и `deploy` (публикация `dist/` — только при успешной сборке на `main`).
+  - Загружает артефакт `dist` для удобства отладки в Actions.
+
+  Этот подход даёт быструю проверку PR'ов и уверенный автодеплой только при удачной сборке на `main`.
+
+  Пример workflow (используйте secrets.GITHUB_TOKEN, ничего дополнительно не нужно):
    ```yaml
    name: Deploy to GitHub Pages
 
@@ -71,6 +79,8 @@
            with:
              node-version: 20
          - run: npm ci
+         - run: npm run lint
+         - run: npm run typecheck
          - run: npm run build
          - name: Publish to gh-pages
            uses: peaceiris/actions-gh-pages@v3
@@ -80,6 +90,22 @@
    ```
 
 3. Push -> GitHub Actions соберёт проект и опубликует сайт на ветке `gh-pages`.
+
+---
+
+## Рекомендации для локальной сборки и типичных проблем
+
+- Если `npm run build` падает локально из-за `esbuild.exe` (Windows) — закройте редакторы/процессы, которые могут держать файл; иногда помогает удаление папки `node_modules` и запуск `npm ci` заново.
+- Если система жалуется, что `tsc` не найден ("'tsc' is not recognized"), убедитесь, что dev-зависимости установлены локально (`npm ci`) — `tsc` используется из `node_modules/.bin`.
+- Для быстрой локальной проверки CI выполняйте:
+```pwsh
+npm ci
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Эти шаги повторяют CI и помогут отловить проблемы ещё до пуша.
 
 ---
 

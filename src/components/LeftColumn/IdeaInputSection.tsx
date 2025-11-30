@@ -1,4 +1,4 @@
-import { useProject } from '../../contexts/ProjectContext';
+import { useProject } from '../../contexts/useProject';
 import styles from './IdeaInputSection.module.css';
 
 export function IdeaInputSection() {

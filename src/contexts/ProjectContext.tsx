@@ -1,26 +1,14 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import type { ReactNode } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { ProjectContext } from './projectContextInstance';
+import type { ProjectContextValue, ProjectProviderChildren } from './projectContextTypes';
 import type { Project, ProblemTa, CompetitionItem } from '../types';
 import { createEmptyProject, createEmptyCompetitionItem } from '../utils/factories';
 
 const STORAGE_KEY = 'research-app-current-project';
 const DEBOUNCE_MS = 500;
 
-interface ProjectContextValue {
-  project: Project;
-  setProject: (project: Project) => void;
-  updateIdea: (idea: string) => void;
-  updateProblemTa: (problemTa: ProblemTa) => void;
-  updateCompetition: (competition: CompetitionItem[]) => void;
-  addCompetitor: () => void;
-  updateCompetitor: (id: string, item: CompetitionItem) => void;
-  removeCompetitor: (id: string) => void;
-  updateMarkdownRaw: (markdown: string) => void;
-  clearProject: () => void;
-  isSaving: boolean;
-}
-
-const ProjectContext = createContext<ProjectContextValue | null>(null);
+// ProjectContext instance and types are defined in separate files to keep this module
+// exporting only React components (ProjectProvider). See `projectContextInstance.ts`.
 
 // Load from localStorage
 function loadProject(): Project {
@@ -44,7 +32,7 @@ function saveProject(project: Project): void {
   }
 }
 
-export function ProjectProvider({ children }: { children: ReactNode }) {
+export function ProjectProvider({ children }: ProjectProviderChildren) {
   const [project, setProjectState] = useState<Project>(loadProject);
   const [isSaving, setIsSaving] = useState(false);
   const [saveTimeoutId, setSaveTimeoutId] = useState<ReturnType<typeof setTimeout> | null>(null);
@@ -142,10 +130,6 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   return <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>;
 }
 
-export function useProject(): ProjectContextValue {
-  const context = useContext(ProjectContext);
-  if (!context) {
-    throw new Error('useProject must be used within a ProjectProvider');
-  }
-  return context;
-}
+// Note: `useProject` is implemented in `src/contexts/useProject.ts` so this file only
+// exports the provider component. This keeps the file compatible with react-refresh
+// expectations (files that export components only).

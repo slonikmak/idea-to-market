@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useProject } from '../../contexts/ProjectContext';
+import React from 'react';
+import { useProject } from '../../contexts/useProject';
 import { PROBLEM_TA_PROMPT_TEMPLATE, COMPETITION_PROMPT_TEMPLATE, generatePrompt } from '../../constants/prompts';
 import styles from './LLMPromptSection.module.css';
 
@@ -7,11 +7,11 @@ type PromptType = 'problemTa' | 'competition';
 
 export function LLMPromptSection() {
   const { project } = useProject();
-  const [showModal, setShowModal] = useState(false);
-  const [currentPrompt, setCurrentPrompt] = useState('');
-  const [promptType, setPromptType] = useState<PromptType>('problemTa');
-  const [copied, setCopied] = useState(false);
-  const [warning, setWarning] = useState('');
+  const [showModal, setShowModal] = React.useState(false);
+  const [currentPrompt, setCurrentPrompt] = React.useState('');
+  const [promptType, setPromptType] = React.useState<PromptType>('problemTa');
+  const [copied, setCopied] = React.useState(false);
+  const [warning, setWarning] = React.useState('');
 
   const handleGeneratePrompt = async (type: PromptType) => {
     if (!project.idea.trim()) {
@@ -68,7 +68,10 @@ export function LLMPromptSection() {
 
       {showModal && (
         <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          <div
+            className={styles.modal}
+            onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+          >
             <div className={styles.modalHeader}>
               <h3 className={styles.modalTitle}>
                 {promptType === 'problemTa' ? 'Problem + TA Prompt' : 'Competition Prompt'}

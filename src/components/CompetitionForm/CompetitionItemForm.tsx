@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import type { CompetitionItem } from '../../types';
 import styles from './CompetitionItemForm.module.css';
 
@@ -9,7 +9,7 @@ interface CompetitionItemFormProps {
 }
 
 export function CompetitionItemForm({ item, onUpdate, onRemove }: CompetitionItemFormProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = React.useState(true);
 
   const updateField = <K extends keyof CompetitionItem>(field: K, value: CompetitionItem[K]) => {
     onUpdate({ ...item, [field]: value });
@@ -54,7 +54,7 @@ export function CompetitionItemForm({ item, onUpdate, onRemove }: CompetitionIte
         <div className={styles.headerActions}>
           <button
             className={styles.deleteButton}
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               onRemove();
             }}

@@ -1,4 +1,4 @@
-import { useProject } from '../../contexts/ProjectContext';
+import { useProject } from '../../contexts/useProject';
 import type { ProblemTa, VotesMap } from '../../types';
 import styles from './ProblemTaForm.module.css';
 

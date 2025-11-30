@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import type { ReactNode } from 'react';
 import styles from './MainLayout.module.css';
 
@@ -11,7 +11,7 @@ interface MainLayoutProps {
 }
 
 export function MainLayout({ leftColumn, problemTaTab, competitionTab }: MainLayoutProps) {
-  const [activeTab, setActiveTab] = useState<TabId>('problemTa');
+  const [activeTab, setActiveTab] = React.useState<TabId>('problemTa');
 
   return (
     <div className={styles.layout}>
