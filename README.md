@@ -82,11 +82,3 @@ Contributing & next steps
   3. For Competition: run prompts using a deep-research LLM/service and copy the Markdown result.
   4. Paste the LLM Markdown in the Markdown panel and use "Import from Markdown" to update structured data.
 
-  Contributing & next steps
-  - Add integrations for direct LLM API calls, improve parsing/mapping rules, and add localization or sample templates as needed.
-
-  ---
-
-  Коротко (на русском)
-
-  Приложение для исследовательской работы над идеями: ввод идеи, Problem+TA, Competition, генерация подсказок и импорт/экспорт через Markdown. Для глубокого поиска в разделе Competition рекомендуется использовать внешние Deep Research сервисы (ChatGPT, Perplexity и т.п.).
