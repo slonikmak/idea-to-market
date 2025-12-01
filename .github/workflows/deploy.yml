@@ -52,7 +52,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-artifact
-          path: dist
+          # upload the contents of dist (not the directory itself) so download can place them into ./dist
+          path: dist/**
 
   deploy:
     name: Deploy to GitHub Pages
@@ -67,7 +68,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-artifact
-          path: .
+          # extract the artifact contents into ./dist so publish_dir matches the expected folder
+          path: dist
 
       - name: "Debug: list downloaded files"
         run: ls -la && echo "--- dist contents ---" && ls -la dist || true
