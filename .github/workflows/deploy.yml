@@ -44,6 +44,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug: list dist before upload
+        run: echo "---- dist content ----" && ls -la dist || true
+
       - name: Upload build artifact
         if: success()
         uses: actions/upload-artifact@v4
@@ -64,6 +67,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-artifact
+          path: .
+
+      - name: Debug: list downloaded files
+        run: ls -la && echo "--- dist contents ---" && ls -la dist || true
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v3
